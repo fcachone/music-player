@@ -2,11 +2,18 @@ const botaoPlayPause = document.getElementById("play-pause");
 const botaoProximoCapitulo = document.getElementById("proximo");
 const botaoCapituloAnterior = document.getElementById("anterior");
 const audio = document.getElementById("audio-capitulo");
+const timeDisplay = document.getElementById('time');
 const textoCapitulo = document.getElementById("capitulo");
 const totalCapitulos = 10;
 
 let taTocando = false;
 let capituloAtual = 1;
+
+audio.ontimeupdate = function() {
+  const minutes = Math.floor(audio.currentTime / 60);
+  const seconds = Math.floor(audio.currentTime % 60);
+  timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+};
 
 function tocarFaixa() {
   audio.play();
